@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <title>Log in | Kats Shelter</title>
+</head>
+
+<body class="bg-img">
+  <nav class="navbar bg-dark navbar-expand-lg fixed">
+    <div class="container">
+      <a href="index.html" class="navbar-brand fw-bold text-light"><img src="images/logok.png" alt="kats shelter logo" class="img-fluid"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link text-light" aria-current="page" href="index.html">Go back</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container my-5">
+    <div class="row p-4">
+      <div class="col-md-5">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="text-center">Authorized Log-In</h2>
+            <form class="form-login" role="form" id="loginForm">
+              <div class="form-group">
+                <input type="text" id="username" placeholder="username" class="form-control my-2" required>
+              </div>
+              <div class="form-group">
+                <input type="password" id="password" placeholder="password" class="form-control my-2" required>
+              </div>
+              <button type="submit" class="btn btn-dark text-center w-30 center" id="login" name="login">Log in</button>
+            </form>
+            <p id="errorMessage" style="color: red;"></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7 text-center">
+        <img src="images/slogan.png" class="img-fluid" alt="Responsive image">
+      </div>
+    </div>
+  </div>
+  <footer class="bg-dark p-2 mt-5 text-light position-fixed bottom-0 w-100 text-center">
+    Open-source project on <a href="https://github.com/kar-codes?tab=repositories" target=”_blank” class="link-light">Github</a> by Karen
+  </footer>
+  <script src="./js/jquery.js"></script>
+  <script src="./js/owners.js"></script>
+  <script src="./js/pets.js"></script>
+  <script src="./js/log-in.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <title>Search Pets | Kats Shelter</title>
+</head>
+
+<body>
+  <nav class="navbar bg-dark navbar-expand-lg fixed">
+    <div class="container">
+      <a href="index.html" class="navbar-brand fw-bold text-light"><img src="images/logok.png" alt="kats shelter logo"
+          class="img-fluid"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="dashboard.html">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="index.html">Log out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="modal fade" id="addPetModal" tabindex="-1" aria-labelledby="addPetModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addPetModalLabel">Add New Pet</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addPetForm">
+                    <div class="mb-3">
+                        <label for="newPetName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="newPetName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPetDescription" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="newPetDescription" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="ownerDropdown2" class="form-label">Owner</label>
+                      <select class="form-select" id="ownerDropdown2" name="ownerId">
+                         
+                      </select>
+                  </div>
+                  <input type="hidden" id="newPetId" name="newPetId">
+                    <button type="submit" class="btn btn-success" id="addNewPet">Add Pet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="panel-title my-4"> <img src="images/kats-kat.png" alt="kats black cat" width="60px">Pets</h2>
+
+        <div class="input-group mb-3">
+          <input type="text" id="petNameFilter" class="form-control" placeholder="Filter by pet name..." aria-label="Recipient's username"
+            aria-describedby="button-addon2">
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addPetModal" id="addNew">Add new
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
+              viewBox="0 0 16 16">
+              <path
+                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+            </svg></button>
+        </div>
+
+        <table class="table table-hover" id="pets-table">
+          <thead>
+            <tr>
+              <th id="id">Id</th>
+              <th id="name">Name</th>
+              <th id="description">Description</th>
+              <th id="owner">Owner</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<!-- Edit Pet Modal -->
+<div class="modal fade" id="editPetModal" tabindex="-1" aria-labelledby="editPetModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editPetModalLabel">Edit Pet Information</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="editPetForm">
+              <div class="mb-3">
+                <label for="editPetName" class="form-label">Name</label>
+                <input type="text" class="form-control" id="editPetName" required>
+              </div>
+              <div class="mb-3">
+                <label for="editDescription" class="form-label">Description</label>
+                <input type="text" class="form-control" id="editPetDescription" required>
+              </div>
+              <div class="mb-3">
+                  <label for="ownerDropdown" class="form-label">Owner</label>
+                  <select class="form-select" id="ownerDropdown" name="ownerId">
+                     
+                  </select>
+              </div>
+          </div>
+          <input type="hidden" id="editPetId" name="editPetId">
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="savePetChanges">Save changes</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<!-- Delete PET Modal -->
+<div class="modal fade" id="deletePetModal" tabindex="-1" aria-labelledby="deletePetModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="deletePetModalLabel">Delete Pet</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <p>Are you sure you want to delete this pet?</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Assign Owner Modal -->
+<div class="modal fade" id="yourAssignOwnerModal" tabindex="-1" aria-labelledby="assignOwnerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="assignOwnerModalLabel">Assign Existing Owner</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <label for="assignOwnerDropdown" class="form-label">Select an existing owner:</label>
+              <select class="form-select" id="assignOwnerDropdown">
+                 
+              </select>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="assignOwnerSaveBtn">Save changes</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Add New Owner Modal -->
+<div class="modal fade" id="addOwnerModal" tabindex="-1" aria-labelledby="addOwnerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="addOwnerModalLabel">Add New Owner</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form id="addNewOwnerForm">
+                  <div class="mb-3">
+                      <label for="newName" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="newName" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="newIdCard" class="form-label">DNI</label>
+                      <input type="text" class="form-control" id="newIdCard" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="newEmail" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="newEmail" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="newPhoneNumber" class="form-label">Phone Number</label>
+                      <input type="text" class="form-control" id="newPhoneNumber" required>
+                  </div>
+                  <div class="alert alert-danger" role="alert" id="addOwnerModalError">
+                    Owner already exists! Check email or DNI.
+                  </div>
+                  <button type="submit" class="btn btn-success">Add Owner</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- New modal for prompting to add a new petsy pet :3 -->
+<div class="modal fade" id="noPetsModal" tabindex="-1" aria-labelledby="noPetsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="noPetsModalLabel">Pet Not Found</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+           <div class="alert alert-danger" role="alert" id="">
+            <p>The pet you are looking for does not exist. Do you want to register a new pet?</p>
+          </div>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addPetModal">Register New Pet</button>
+        </div>
+     </div>
+  </div>
+</div>
+
+
+
+  <footer class="bg-dark p-2 mt-5 text-light position-fixed bottom-0 w-100 text-center">
+    Open-source project on <a href="https://github.com/kar-codes?tab=repositories" target=”_blank” class="link-light">Github</a> by Karen
+  </footer>
+  <script src="./js/jquery.js"></script>
+  <script src="./js/pets.js"></script>
+  <script src="./js/owners.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
